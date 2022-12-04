@@ -8,29 +8,52 @@ function App() {
   const [input, setInput] = useState("");
   const [toggleSubmit, setToggleSubmit] = useState(true);
   const [editItem, setEditItem] = useState({});
+  const [dateValue, setDateValue] = useState("");
+  const [timeValue, setTimeValue] = useState("");
+
   const handleItem = (e) => {
     setInput(e.target.value);
   };
 
+  const handleDate = (e) => {
+    setDateValue(e.target.value);
+  };
+
+  const handleTime = (e) => {
+    setTimeValue(e.target.value);
+  };
+  const clearInputs = () => {
+    setInput("");
+    setDateValue("");
+    setTimeValue("");
+  };
+  const callEditTodo = (props) => {
+    setInput(props.name);
+    setTimeValue(props.time);
+    setDateValue(props.date);
+  };
   const handeAddTodo = (e) => {
     e.preventDefault();
-    if (!input) {
-      alert("Please enter Something");
+    if (!input || !timeValue || !dateValue) {
+      alert("Sorry,you didn't entered all fields . Please Enter All");
     } else if (input && !toggleSubmit) {
       setItem(
         items.map((e) => {
           if (e.id == editItem.id) {
-            return { ...e, name: input };
+            return { ...e, name: input, time: timeValue, date: dateValue };
           }
           return e;
         })
       );
       setToggleSubmit(true);
-      setInput("");
+      clearInputs();
     } else {
-      setItem([...items, { id: uuidv4(), name: input }]);
-      setInput("");
-      e.target.reset();
+      setItem([
+        ...items,
+        { id: uuidv4(), name: input, time: timeValue, date: dateValue },
+      ]);
+      clearInputs();
+      // e.target.reset();
     }
   };
   // console.log(input);
@@ -46,14 +69,28 @@ function App() {
           placeholder="Note Your Task Here"
           onChange={handleItem}
         />
-        <button className="btn">{toggleSubmit ? "Add" : "Edit"}</button>
+        <input
+          type="date"
+          value={dateValue}
+          className="date"
+          onChange={handleDate}
+        />
+        <input
+          type="time"
+          value={timeValue}
+          className="time"
+          onChange={handleTime}
+        />
+        <button className={toggleSubmit ? "btn" : "btn-ed"}>
+          {toggleSubmit ? "Add" : "Edit"}
+        </button>
       </form>
       <Todolist
         todos={items}
         setTodos={setItem}
         onToggle={setToggleSubmit}
         onEdit={setEditItem}
-        inputEdit={setInput}
+        inputEdit={callEditTodo}
       />
     </div>
   );

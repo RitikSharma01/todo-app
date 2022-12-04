@@ -12,7 +12,7 @@ function Todolist({ todos, setTodos, onToggle, onEdit, inputEdit }) {
   const handleEdit = (item) => {
     onToggle(false);
     console.log(item.id);
-    inputEdit(item.name);
+    inputEdit(item);
     onEdit(item);
   };
 
@@ -22,7 +22,10 @@ function Todolist({ todos, setTodos, onToggle, onEdit, inputEdit }) {
         <li>
           {todos.map((item, index) => (
             <div key={index} className="todos">
-              <h2>{item.name}</h2>
+              <h2 className="tododata">{item.name}</h2>
+              <h3 className="tododate">{item.date}</h3>
+              <h3 className="todotime">{item.time}</h3>
+
               <button className="btn-submit" onClick={() => handleDelete(item)}>
                 Done
               </button>

@@ -15,6 +15,18 @@ margin: 10px;
 padding: 10px;
 border-radius: 10px;
 }
+.date{
+  height: 30px;
+margin: 10px;
+padding: 10px;
+border-radius: 10px
+}
+.time{
+  height: 30px;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px
+}
 .btn{
 width: 100px;
 height: 60px;
@@ -22,6 +34,15 @@ margin: 10px;
 padding: 20px;
 border-radius: 10%;
 background-color: aqua;
+}
+.btn-ed{
+    width: 100px;
+    height: 60px;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10%;
+    background:rgb(64, 136, 64);
+    
 }
 .todos{
   margin-left: auto;
@@ -38,15 +59,39 @@ background-color: aqua;
   border-radius: 5px;
   background-color: #f5f5f5;
 }
+.tododata{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  margin-left:5%;
+  margin-right:5%;
+  width: 40%;
+
+}
+.tododate{
+  display: flex;
+  flex-direction: row;
+
+}
+.todotime{
+  display: flex;
+  flex-direction: row;
+  margin-left:5%;
+
+}
 .btn-submit{
 margin-left: auto;
 width: 80px;
 padding: 5px;
+background:rgb(151, 71, 71);
+color: white;
 }
 .btn-edit{
   margin-left: 1%;
   padding: 5px;
   width: 80px;
+  background:rgb(64, 136, 64);
+  color: white;
 
 
 }
