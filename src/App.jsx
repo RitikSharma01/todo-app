@@ -7,7 +7,7 @@ function App() {
   const [items, setItem] = useState([]);
   const [input, setInput] = useState("");
   const [toggleSubmit, setToggleSubmit] = useState(true);
-
+  const [editItem, setEditItem] = useState({});
   const handleItem = (e) => {
     setInput(e.target.value);
   };
@@ -17,12 +17,24 @@ function App() {
     if (!input) {
       alert("Please enter Something");
     } else if (input && !toggleSubmit) {
+      setItem(
+        items.map((e) => {
+          if (e.id == editItem.id) {
+            return { ...e, name: input };
+          }
+          return e;
+        })
+      );
+      setToggleSubmit(true);
+      setInput("");
     } else {
       setItem([...items, { id: uuidv4(), name: input }]);
+      setInput("");
       e.target.reset();
     }
   };
-  console.log(items);
+  // console.log(input);
+  // console.log(items);
   return (
     <div className="app">
       <h1>My Todo's List</h1>
@@ -30,6 +42,7 @@ function App() {
         <input
           type="text"
           className="inp"
+          value={input}
           placeholder="Note Your Task Here"
           onChange={handleItem}
         />
@@ -39,7 +52,8 @@ function App() {
         todos={items}
         setTodos={setItem}
         onToggle={setToggleSubmit}
-        onEdit={handleItem}
+        onEdit={setEditItem}
+        inputEdit={setInput}
       />
     </div>
   );

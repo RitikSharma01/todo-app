@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import "../App.css";
-function Todolist({ todos, setTodos, onToggle, onEdit }) {
+
+function Todolist({ todos, setTodos, onToggle, onEdit, inputEdit }) {
+  // const [editInput, setEditInput] = useState("");
+
   const handleDelete = ({ id }) => {
     console.log(id);
     setTodos(todos.filter((todo) => todo.id !== id));
   };
+
   const handleEdit = (item) => {
-    console.log(item.id);
-    onEdit(item.name);
-    console.log((item) => item.name);
     onToggle(false);
+    console.log(item.id);
+    inputEdit(item.name);
+    onEdit(item);
   };
 
   return (
